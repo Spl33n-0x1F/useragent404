@@ -173,6 +173,28 @@ img{max-width:100%}
 .gkids a.active{color:var(--accent);border-left-color:var(--accent);background:var(--panel2);font-weight:500}
 
 #main{flex:1;min-width:0;padding:clamp(1.3rem,3vw,2.6rem) clamp(1rem,3vw,2.8rem) 6rem;max-width:64rem}
+
+/* cert scope selector + exam banner + coverage pills */
+#scopebar{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.1rem;
+  padding:.6rem .8rem;background:var(--bg2);border:1px solid var(--border);border-radius:10px}
+#scopebar .sl{font-family:"JetBrains Mono",monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+#certsel{background:var(--panel);border:1px solid var(--border2);color:var(--accent);font-family:"JetBrains Mono",monospace;
+  font-weight:700;font-size:.82rem;letter-spacing:.02em;padding:.42rem 1.8rem .42rem .6rem;border-radius:8px;cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--accent) 50%),linear-gradient(135deg,var(--accent) 50%,transparent 50%);
+  background-position:calc(100% - 15px) center,calc(100% - 10px) center;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+#certsel:hover{border-color:var(--accent)}
+#scopehint{font-family:"JetBrains Mono",monospace;font-size:.72rem;color:var(--faint);margin-left:auto}
+.exam-banner{margin:0 0 1.6rem;padding:.8rem 1rem;border:1px solid var(--border2);border-left:3px solid var(--accent);
+  border-radius:0 10px 10px 0;background:var(--panel);font-size:.88rem;color:var(--muted);line-height:1.6}
+.exam-banner b{color:var(--fg);font-weight:700}
+.exam-banner .et{display:block;font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
+.exam-banner.warn{border-left-color:var(--amber)}
+.exam-banner.warn .et{color:var(--amber)}
+.covpill{font-family:"JetBrains Mono",monospace;font-size:.58rem;font-weight:700;letter-spacing:.08em;
+  color:var(--accent2);border:1px solid var(--border2);border-radius:5px;padding:.1em .45em;margin-left:.55rem;
+  vertical-align:middle;white-space:nowrap}
 #main h1{font-family:"Hanken Grotesk",Inter,sans-serif;font-weight:800;letter-spacing:-.03em;
   font-size:clamp(1.7rem,4vw,2.4rem);color:var(--fg);text-wrap:balance;margin:.2rem 0 .4rem;
   padding-bottom:.8rem;border-bottom:1px solid var(--border)}
