@@ -50,11 +50,17 @@ img{max-width:100%}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;display:flex;align-items:center;gap:.6rem;
   padding:.6rem clamp(.9rem,3vw,1.4rem);background:color-mix(in srgb,var(--bg) 82%,transparent);
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.brand{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:.95rem;color:var(--fg);white-space:nowrap}
+.brand{display:flex;align-items:center;gap:.6rem;white-space:nowrap;font-family:"JetBrains Mono",ui-monospace,monospace}
 .brand:hover{text-decoration:none}
-.brand .at{color:var(--accent)}
-.brand.on{color:var(--accent)}
-.brand .cur{color:var(--accent);animation:blink 1.2s steps(1) infinite}
+.brand .mark{width:34px;height:34px;border-radius:9px;display:block;flex:none}
+.brand .wm{font-weight:700;font-size:1.02rem;letter-spacing:-.02em;color:var(--fg)}
+.brand .wm .g{background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.brand .tag{display:flex;align-items:center;gap:.4rem;margin-left:.35rem;padding-left:.6rem;
+  border-left:1px solid var(--border);font-size:.7rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.brand .tag .st{width:.5rem;height:.5rem;border-radius:50%;background:var(--accent);flex:none;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+@media (max-width:680px){.brand .tag{display:none}}
 @keyframes blink{50%{opacity:0}}
 .navlinks{display:flex;gap:.1rem;margin-left:.4rem}
 .navlinks a{font-weight:600;font-size:.86rem;color:var(--muted);padding:.42rem .75rem;border-radius:8px;border:1px solid transparent}
