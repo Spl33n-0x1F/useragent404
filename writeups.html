@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Writeups // useragent404</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="index.html">useragent404<span class="at">@fieldmanual</span></a>
+  <nav class="navlinks">
+    <a href="writeups.html" data-nav="writeups.html">Writeups</a>
+    <a href="about.html" data-nav="about.html">About Me</a>
+  </nav>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme" title="Toggle theme">&#9680;</button>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">Field Notes</p>
+  <h1>Writeups<br>from the lab.</h1>
+  <p class="tagline" data-type="ls -la ./writeups/ --upcoming"></p>
+  <p class="lead">Walkthroughs and methodology notes, published as I go &mdash; HTB Pro Labs, boxes, and exam retrospectives. Attack paths end to end: recon, foothold, pivot, escalate, document.</p>
+</section>
+
+<div class="wrap">
+  <p class="sec-label">Pipeline</p>
+  <div class="wu-grid" id="wu-grid"></div>
+</div>
+
+<script>
+/* add future writeups here; set status:"live" and url:"..." to publish a card as a link */
+var WRITEUPS=[
+  {t:"Dante",    plat:"HTB Pro Lab", diff:"Intermediate", status:"plan", tags:["AD","Pivoting","Linux","Windows"], sum:"Full Pro Lab chain: external foothold through tunnelling to complete network compromise."},
+  {t:"Fullhouse",plat:"HTB Pro Lab", diff:"Hard",         status:"plan", tags:["AD","Web","Pivoting"],            sum:"Chained web and AD attack paths across a segmented enterprise estate."},
+  {t:"Xen",      plat:"HTB Pro Lab", diff:"Hard",         status:"plan", tags:["AD","Linux","Kerberos"],          sum:"Kerberos-heavy lab: delegation abuse and lateral movement, step by step."},
+  {t:"P.O.O",    plat:"HTB Pro Lab", diff:"Insane",       status:"plan", tags:["AD","ACL","Trusts"],              sum:"ACL abuse and domain-trust escalation across a tight, low-noise network."},
+  {t:"CPTS Exam Retrospective", plat:"HTB Academy", diff:"Reflection", status:"plan", tags:["Methodology","Reporting"], sum:"Time management, enumeration discipline, and report craft from the Penetration Tester path."}
+];
+(function(){
+  var grid=document.getElementById('wu-grid');
+  WRITEUPS.forEach(function(w){
+    var card=document.createElement(w.status==='live'&&w.url?'a':'article');
+    card.className='wu'; if(w.status==='live'&&w.url){card.href=w.url;}
+    var badge=w.status==='live'?'<span class="badge live">Published</span>':'<span class="badge plan">Planned</span>';
+    card.innerHTML='<div class="wu-top">'+badge+'<span class="wu-plat">'+w.plat+'</span></div>'
+      +'<h3>'+w.t+'</h3><p>'+w.sum+'</p>'
+      +'<div class="wu-tags">'+w.tags.map(function(x){return '<span>#'+x+'</span>';}).join('')+'</div>'
+      +'<div class="wu-foot">'+w.diff+'</div>';
+    grid.appendChild(card);
+  });
+})();
+</script>
+<script src="assets/app.js"></script>
+</body>
+</html>
