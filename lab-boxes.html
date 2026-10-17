@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lab Boxes // useragent404</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/favicon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ---- Lab Boxes page-scoped ---- */
+.lb-intro{border:1px solid var(--border);background:var(--panel);border-radius:14px;
+  padding:1.1rem 1.2rem;margin:1.4rem 0 2rem}
+.lb-intro p{margin:.4rem 0;color:var(--muted);font-size:.93rem}
+.lb-intro strong{color:var(--fg)}
+.lb-src{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.lb-src a{display:inline-flex;align-items:center;gap:.35rem;font-family:"JetBrains Mono",monospace;
+  font-size:.74rem;padding:.3rem .6rem;border:1px solid var(--border2);border-radius:999px;
+  background:var(--panel2);color:var(--accent2)}
+.lb-src a:hover{border-color:var(--accent2)}
+
+.lb-overall{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+  padding:.7rem 0;margin-bottom:.4rem;background:color-mix(in srgb,var(--bg) 90%,transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.lb-overall .lab{font-family:"JetBrains Mono",monospace;font-size:.72rem;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--faint)}
+.lb-overall .ct{font-family:"JetBrains Mono",monospace;font-size:.85rem;color:var(--fg)}
+.lb-reset{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:.72rem;
+  background:none;border:1px solid var(--border2);color:var(--muted);border-radius:8px;
+  padding:.3rem .6rem;cursor:pointer}
+.lb-reset:hover{border-color:var(--amber);color:var(--amber)}
+
+.cert{border:1px solid var(--border);background:var(--panel);border-radius:16px;
+  padding:1.1rem 1.2rem 1.3rem;margin:1.2rem 0}
+.cert-hd{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+.cert-hd h2{margin:0;font-size:1.3rem;letter-spacing:-.01em}
+.cert-hd .vendor{font-family:"JetBrains Mono",monospace;font-size:.7rem;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--on-accent);background:linear-gradient(135deg,var(--accent),var(--accent2));
+  padding:.15rem .5rem;border-radius:999px}
+.cert-hd .prog{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:.82rem;color:var(--muted)}
+.cert-hd .prog b{color:var(--accent)}
+.cert-blurb{color:var(--muted);font-size:.9rem;margin:.55rem 0 .2rem}
+.cert-note{font-size:.82rem;color:var(--amber);margin:.4rem 0 0;display:flex;gap:.4rem}
+.bar{height:5px;border-radius:999px;background:var(--mark);overflow:hidden;margin:.7rem 0 .4rem}
+.bar > i{display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s ease}
+
+.grp{margin-top:1rem}
+.grp-lab{font-family:"JetBrains Mono",monospace;font-size:.72rem;text-transform:uppercase;
+  letter-spacing:.09em;color:var(--faint);margin:.2rem 0 .5rem}
+.box{display:flex;align-items:center;gap:.65rem;padding:.5rem .2rem;border-bottom:1px solid var(--border)}
+.box:last-child{border-bottom:none}
+.box input{appearance:none;-webkit-appearance:none;flex:none;width:18px;height:18px;border-radius:5px;
+  border:1.5px solid var(--border2);background:var(--panel2);cursor:pointer;position:relative;margin:0}
+.box input:checked{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}
+.box input:checked::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;
+  border:solid var(--on-accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.box .nm{font-weight:600;font-size:.96rem;min-width:7.5rem}
+.box.done .nm{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--border2)}
+.box .chips{display:flex;gap:.35rem;flex-wrap:wrap}
+.chip{font-family:"JetBrains Mono",monospace;font-size:.66rem;padding:.12rem .45rem;border-radius:999px;
+  border:1px solid var(--border2);color:var(--muted);white-space:nowrap}
+.chip.lx{color:var(--accent)} .chip.win{color:var(--accent2)} .chip.ad{color:var(--amber)}
+.box .lk{margin-left:auto;display:flex;gap:.35rem}
+.box .lk a{font-family:"JetBrains Mono",monospace;font-size:.68rem;padding:.2rem .5rem;border-radius:7px;
+  border:1px solid var(--border2);color:var(--muted);background:var(--panel2)}
+.box .lk a:hover{border-color:var(--accent2);color:var(--accent2)}
+@media(max-width:560px){.box{flex-wrap:wrap}.box .lk{margin-left:1.9rem;width:100%}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="index.html">
+    <img class="mark" src="assets/logo-badge.svg" alt="" width="34" height="34">
+    <span class="wm">useragent<span class="g">404</span></span>
+    <span class="tag"><i class="st"></i>0x404</span>
+  </a>
+  <nav class="navlinks">
+    <a href="lab-boxes.html" data-nav="lab-boxes.html">Lab Boxes</a>
+    <a href="writeups.html" data-nav="writeups.html">Writeups</a>
+    <a href="about.html" data-nav="about.html">About Me</a>
+  </nav>
+  <span class="spacer"></span>
+  <button class="iconbtn" id="theme" aria-label="Toggle theme" title="Toggle theme">&#9680;</button>
+</header>
+
+<section class="hero">
+  <p class="eyebrow">Target Practice</p>
+  <h1>Lab Boxes<br>by certification.</h1>
+  <p class="tagline" data-type="for box in $(cat targets.txt); do ./pwn.sh $box; done"></p>
+  <p class="lead">A per-cert HackTheBox prep checklist. Tick a box when you root it &mdash; progress saves to this browser, so it doubles as a reminder of what&rsquo;s left. The field manual is the <strong>technique reference</strong>; these boxes are where you drill it under exam conditions.</p>
+</section>
+
+<div class="wrap">
+  <div class="lb-intro">
+    <p><strong>Why 0xdf &amp; ippsec on every row.</strong> This manual is a generic methodology reference &mdash; it is <em>not</em> a line-by-line copy of any one creator&rsquo;s walkthrough. For the per-box application that most people lean on, each target links straight to <strong>0xdf&rsquo;s written writeup</strong> and <strong>ippsec&rsquo;s video</strong>. Use them to check your path after you&rsquo;ve tried the box yourself, not before.</p>
+    <p><strong>Confidence labels.</strong> CPTS and OSCP sets are curated from the long-standing community lists (TJnull / NetSecFocus) and HTB-native AD prep. OSEP / OSWE / OSED are <span style="color:var(--amber)">community-recommended starters</span> &mdash; cross-check the live sheet, since those tracks lean more on Proving Grounds than HTB.</p>
+    <div class="lb-src">
+      <a href="https://docs.google.com/spreadsheets/d/18weuz_Eeynr6sXFQ87Cd5F0slOj9Z6rt" target="_blank" rel="noopener">TJnull Trophy Room (full sheet)</a>
+      <a href="https://0xdf.gitlab.io/" target="_blank" rel="noopener">0xdf.gitlab.io</a>
+      <a href="https://ippsec.rocks/" target="_blank" rel="noopener">ippsec.rocks</a>
+    </div>
+  </div>
+
+  <div class="lb-overall">
+    <span class="lab">Total progress</span>
+    <span class="ct" id="overall">0 / 0 rooted</span>
+    <button class="lb-reset" id="resetAll">reset all</button>
+  </div>
+
+  <div id="certs"></div>
+</div>
+
+<script>
+/* ---- box data: edit freely; id = cert+"/"+name is auto ---- */
+var DATA=[
+ {cert:"CPTS", vendor:"Hack The Box",
+  blurb:"The exam is one large assumed-breach AD network: relentless enumeration, credential reuse, pivoting, and AD attack chains end to end. Drill standalone AD + ADCS + pivoting boxes, then a full Pro Lab.",
+  groups:[
+   {lab:"Active Directory — foundations", os:"ad", boxes:["Forest","Sauna","Active","Support","Return","Cicada"]},
+   {lab:"Active Directory — deeper + ADCS", os:"ad", boxes:["Monteverde","Blackfield","Cascade","Intelligence","Certified","Escape","StreamIO"]},
+   {lab:"Pivoting / multi-host chains", os:"ad", boxes:["Pivotapi","Mantis","Reel"]},
+   {lab:"Pro Labs (closest to exam scale)", os:"ad", boxes:["Zephyr","Dante"]}
+  ]},
+ {cert:"OSCP", vendor:"OffSec",
+  blurb:"Three standalone machines + one small AD set. Manual exploitation only — no SQLMap, no automated-exploitation scanners. Balance Linux, Windows, and AD; TJnull's list is the canon.",
+  groups:[
+   {lab:"Linux — easy", os:"lx", boxes:["Lame","Shocker","Bashed","Nibbles","Beep","Valentine","Networked","Mirai","OpenAdmin","Traverxec","Armageddon","Knife","Postman","Admirer"]},
+   {lab:"Linux — medium", os:"lx", boxes:["Cronos","Nineveh","SolidState","Node","Magic","Mango","TartarSauce","Haircut"]},
+   {lab:"Windows — easy", os:"win", boxes:["Legacy","Blue","Devel","Optimum","Granny","Grandpa","Arctic","Jerry","Bounty","Bastion","Buff","ServMon","Remote","Love"]},
+   {lab:"Windows — medium", os:"win", boxes:["Bastard","Silo","Chatterbox","SecNotes","Worker"]},
+   {lab:"Active Directory (standalone)", os:"ad", boxes:["Forest","Sauna","Active","Monteverde","Blackfield","Cascade","Intelligence","Fuse"]}
+  ]},
+ {cert:"OSEP", vendor:"OffSec",
+  note:"Community-recommended starters. OSEP's AV/AppLocker evasion core lives in PEN-300 + Proving Grounds; HTB covers the AD-lateral / MSSQL-link / Kerberos half.",
+  vendor2:true,
+  blurb:"Advanced AD lateral movement, cross-forest/trust abuse, MSSQL linked servers, and defense evasion. Lean into the Kerberos- and relay-heavy boxes.",
+  groups:[
+   {lab:"AD lateral / trusts / MSSQL links", os:"ad", boxes:["Mantis","Reel","Sizzle","Scrambled","Flight","Multimaster","StreamIO","Outdated","Absolute"]}
+  ]},
+ {cert:"OSWE", vendor:"OffSec",
+  note:"Community-recommended starters. OSWE is white-box source review — Proving Grounds + the WEB-300 code audits are the primary vehicle; these HTB boxes drill the exploit patterns.",
+  blurb:"Source-driven web exploitation: auth bypass, SQLi → RCE, insecure deserialization, type juggling. Get the shell by reading the code, then write the one-shot script.",
+  groups:[
+   {lab:"White-box web exploit patterns", os:"lx", boxes:["Falafel","Magic","Schooled","Monitors","Hawk","Unattended","Health","Stocker","Pollution","CrossFit","Vault"]}
+  ]},
+ {cert:"OSED", vendor:"OffSec",
+  note:"HTB is NOT the vehicle for OSED — it is Windows userland exploit-dev (stack overflow, SEH, egghunter, DEP/ROP). Prep with these purpose-built targets + the EXP-301 exercises instead of HTB boxes.",
+  blurb:"Reverse small Windows binaries in a debugger, build the overflow, defeat bad chars, then DEP via ROP. Volume on vulnerable servers beats any single box.",
+  groups:[
+   {lab:"Exploit-dev practice targets (not HTB)", os:"win", nolinks:true, boxes:["VulnServer","Brainpan","FreeFloat FTP","MiniShare","Savant Web Server"]}
+  ]}
+];
+
+(function(){
+  var KEY="ua404-labs-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){state={};}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+  function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'');}
+  function ddg(box){return "https://duckduckgo.com/?q="+encodeURIComponent("site:0xdf.gitlab.io "+box);}
+  function ipp(box){return "https://ippsec.rocks/?#"+encodeURIComponent(box);}
+
+  var wrap=document.getElementById('certs'), totalAll=0, doneAll=0;
+
+  DATA.forEach(function(c){
+    var ids=[];
+    var sec=document.createElement('section'); sec.className='cert';
+    var head='<div class="cert-hd"><h2>'+c.cert+'</h2><span class="vendor">'+c.vendor+'</span>'
+      +'<span class="prog" data-prog></span></div>'
+      +'<p class="cert-blurb">'+c.blurb+'</p>'
+      +(c.note?'<p class="cert-note"><span>&#9888;</span><span>'+c.note+'</span></p>':'')
+      +'<div class="bar"><i data-fill></i></div>';
+    var body='';
+    c.groups.forEach(function(g){
+      body+='<div class="grp"><p class="grp-lab">'+g.lab+'</p>';
+      g.boxes.forEach(function(b){
+        var id=c.cert+"/"+slug(b); ids.push(id);
+        var on=!!state[id];
+        var osc=g.os==='lx'?'<span class="chip lx">Linux</span>':g.os==='win'?'<span class="chip win">Windows</span>':'<span class="chip ad">AD</span>';
+        var links=g.nolinks?'':'<span class="lk"><a href="'+ddg(b)+'" target="_blank" rel="noopener">0xdf</a>'
+          +'<a href="'+ipp(b)+'" target="_blank" rel="noopener">ippsec</a></span>';
+        body+='<label class="box'+(on?' done':'')+'" data-id="'+id+'">'
+          +'<input type="checkbox"'+(on?' checked':'')+'>'
+          +'<span class="nm">'+b+'</span><span class="chips">'+osc+'</span>'+links+'</label>';
+      });
+      body+='</div>';
+    });
+    sec.innerHTML=head+body; wrap.appendChild(sec);
+
+    var progEl=sec.querySelector('[data-prog]'), fillEl=sec.querySelector('[data-fill]');
+    function refresh(){
+      var d=ids.filter(function(i){return state[i];}).length, t=ids.length;
+      progEl.innerHTML='<b>'+d+'</b> / '+t+' rooted';
+      fillEl.style.width=(t?Math.round(d/t*100):0)+'%';
+    }
+    sec.querySelectorAll('.box').forEach(function(lbl){
+      var id=lbl.dataset.id, cb=lbl.querySelector('input');
+      cb.addEventListener('change',function(){
+        if(cb.checked)state[id]=1; else delete state[id];
+        lbl.classList.toggle('done',cb.checked); save(); refresh(); overall();
+      });
+    });
+    c._ids=ids; c._refresh=refresh;
+    totalAll+=ids.length; refresh();
+  });
+
+  function overall(){
+    var d=0,t=0;
+    DATA.forEach(function(c){t+=c._ids.length;c._ids.forEach(function(i){if(state[i])d++;});});
+    document.getElementById('overall').textContent=d+' / '+t+' rooted';
+  }
+  overall();
+
+  document.getElementById('resetAll').addEventListener('click',function(){
+    if(!confirm('Clear all rooted checkmarks?'))return;
+    state={}; save();
+    document.querySelectorAll('.box').forEach(function(l){l.classList.remove('done');l.querySelector('input').checked=false;});
+    DATA.forEach(function(c){c._refresh();}); overall();
+  });
+})();
+</script>
+<script src="assets/app.js"></script>
+</body>
+</html>
